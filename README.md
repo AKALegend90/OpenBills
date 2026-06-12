@@ -90,7 +90,7 @@ npm test
 
 ## Screenshots
 
-Add screenshots later.
+![OpenBills dashboard](screenshots/openbills-dashboard.png)
 
 ## License
 
