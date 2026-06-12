@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>OpenBills</AssemblyName>
+    <RootNamespace>OpenBills.Win</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>OpenBills.ico</ApplicationIcon>
+    <PublishSingleFile>true</PublishSingleFile>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.2903.40" />
+    <EmbeddedResource Include="..\..\openbills.html" LogicalName="openbills.html" />
+    <EmbeddedResource Include="OpenBills.ico" LogicalName="OpenBills.ico" />
+  </ItemGroup>
+</Project>

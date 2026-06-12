@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Web builds
+dist/
+
+# .NET builds
+bin/
+obj/
+desktop/**/bin/
+desktop/**/obj/
+
+# Rust/Tauri builds
+target/
+src-tauri/target/
+
+# Logs and local editor files
+*.log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

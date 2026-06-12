@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">OpenBills logo</title>
+  <desc id="desc">A blue bill and checkmark icon for the OpenBills app.</desc>
+  <rect width="256" height="256" rx="56" fill="#2563eb"/>
+  <path d="M70 54h116c11 0 20 9 20 20v108c0 11-9 20-20 20H70c-11 0-20-9-20-20V74c0-11 9-20 20-20Z" fill="#eff6ff"/>
+  <path d="M82 90h92M82 120h72M82 150h48" stroke="#1e3a8a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M119 177l24 24 48-58" fill="none" stroke="#16a34a" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
