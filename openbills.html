@@ -86,7 +86,7 @@
     function about(){layout(`<section class="about"><div class="about-logo">${logoSvg(64)}<h1>OpenBills</h1></div><p>OpenBills is a free, open-source, privacy-first bill tracker.</p><p>No account required.<br>No bank connection.<br>No cloud sync.<br>No ads.<br>All data stays on your device.</p><p>Created by <a href="https://github.com/AKALegend90" target="_blank" rel="noopener noreferrer">AKALegend90</a></p><p>License: MIT</p></section>`)}
     function escapeHtml(value){return String(value).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]))}
     function render(){({dashboard,bills,income,calendar,settings,about}[page]||dashboard)()}
-    render();setTimeout(()=>notifyDueBills(false),800);
+    render();setTimeout(()=>{desktopMessage({type:"settings",startWithWindows:data.settings.startWithWindows,startMinimized:data.settings.startMinimized,notifications:data.settings.notifications});notifyDueBills(false)},800);
   </script>
 </body>
 </html>

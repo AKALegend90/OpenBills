@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json;
+using Microsoft.Win32;
 using Microsoft.Web.WebView2.Core;
 using Microsoft.Web.WebView2.WinForms;
 
@@ -138,8 +139,12 @@ public sealed class MainForm : Form
 
     private static void ConfigureStartup(bool enabled, bool startMinimized)
     {
+        const string runKeyPath = @"Software\Microsoft\Windows\CurrentVersion\Run";
+        const string appName = "OpenBills";
         var startupFolder = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
         var shortcutPath = Path.Combine(startupFolder, "OpenBills.lnk");
+        using var runKey = Registry.CurrentUser.OpenSubKey(runKeyPath, writable: true)
+            ?? Registry.CurrentUser.CreateSubKey(runKeyPath, writable: true);
 
         if (!enabled)
         {
@@ -147,20 +152,21 @@ public sealed class MainForm : Form
             {
                 File.Delete(shortcutPath);
             }
+            runKey?.DeleteValue(appName, throwOnMissingValue: false);
             return;
         }
 
-        var shellType = Type.GetTypeFromProgID("WScript.Shell")
-            ?? throw new InvalidOperationException("Windows shortcut support is unavailable.");
-        dynamic shell = Activator.CreateInstance(shellType)
-            ?? throw new InvalidOperationException("Windows shortcut support is unavailable.");
-        dynamic shortcut = shell.CreateShortcut(shortcutPath);
-        shortcut.TargetPath = Application.ExecutablePath;
-        shortcut.WorkingDirectory = AppContext.BaseDirectory;
-        shortcut.Arguments = startMinimized ? "--minimized" : "";
-        shortcut.Description = "OpenBills";
-        shortcut.IconLocation = Application.ExecutablePath;
-        shortcut.Save();
+        var command = $"\"{Application.ExecutablePath}\"";
+        if (startMinimized)
+        {
+            command += " --minimized";
+        }
+        runKey?.SetValue(appName, command, RegistryValueKind.String);
+
+        if (File.Exists(shortcutPath))
+        {
+            File.Delete(shortcutPath);
+        }
     }
 
     protected override void OnFormClosing(FormClosingEventArgs e)
